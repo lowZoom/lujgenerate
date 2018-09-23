@@ -1,4 +1,4 @@
-package luj.generate.annotation.processing;
+package luj.generate.annotation.process;
 
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.TypeElement;

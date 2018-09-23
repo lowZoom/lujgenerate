@@ -1,4 +1,4 @@
-package luj.generate.annotation.processing;
+package luj.generate.annotation.process;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;

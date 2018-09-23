@@ -1,9 +1,10 @@
-package luj.generate.annotation.processing;
+package luj.generate.annotation.process;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-import java.io.IOException;
+
 import javax.annotation.processing.ProcessingEnvironment;
+import java.io.IOException;
 
 final class ContextImpl implements SingleAnnoProc.Context {
 

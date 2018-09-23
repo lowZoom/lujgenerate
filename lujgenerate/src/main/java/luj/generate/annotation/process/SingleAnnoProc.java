@@ -1,16 +1,17 @@
-package luj.generate.annotation.processing;
+package luj.generate.annotation.process;
 
 import com.google.common.collect.ImmutableSet;
 import com.squareup.javapoet.TypeSpec;
+
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.util.Set;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
 
 public abstract class SingleAnnoProc extends AnnoProc {
 

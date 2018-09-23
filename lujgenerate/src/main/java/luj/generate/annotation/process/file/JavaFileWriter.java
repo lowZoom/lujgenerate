@@ -1,10 +1,11 @@
-package luj.generate.file;
+package luj.generate.annotation.process.file;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-import java.io.IOException;
-import javax.annotation.processing.Filer;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.processing.Filer;
+import java.io.IOException;
 
 @Service
 public class JavaFileWriter {
