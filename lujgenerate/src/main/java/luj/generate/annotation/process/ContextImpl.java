@@ -2,9 +2,9 @@ package luj.generate.annotation.process;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-
-import javax.annotation.processing.ProcessingEnvironment;
 import java.io.IOException;
+import javax.annotation.processing.Filer;
+import javax.annotation.processing.ProcessingEnvironment;
 
 final class ContextImpl implements SingleAnnoProc.Context {
 
@@ -27,6 +27,11 @@ final class ContextImpl implements SingleAnnoProc.Context {
   public void writeToFile(String packageName, TypeSpec classSpec) throws IOException {
     JavaFile file = JavaFile.builder(packageName, classSpec).build();
     file.writeTo(_processingEnv.getFiler());
+  }
+
+  @Override
+  public Filer getFiler() {
+    return _processingEnv.getFiler();
   }
 
   private final ProcType _processingType;
