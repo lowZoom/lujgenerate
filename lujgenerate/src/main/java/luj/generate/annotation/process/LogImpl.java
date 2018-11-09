@@ -1,13 +1,12 @@
 package luj.generate.annotation.process;
 
 import javax.annotation.processing.Messager;
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.tools.Diagnostic;
 
 final class LogImpl implements AnnoProc.Log {
 
-  LogImpl(ProcessingEnvironment processingEnv) {
-    _messager = processingEnv.getMessager();
+  LogImpl(Messager messager) {
+    _messager = messager;
   }
 
   @Override

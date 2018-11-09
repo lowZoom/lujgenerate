@@ -12,6 +12,8 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import luj.generate.annotation.process.file.ClassFileWriter;
+import luj.generate.annotation.process.type.ProcType;
 
 public abstract class SingleAnnoProc extends AnnoProc {
 
@@ -26,9 +28,9 @@ public abstract class SingleAnnoProc extends AnnoProc {
     Filer getFiler();
   }
 
-  public abstract Class<? extends Annotation> supportedAnnotationType();
+  protected abstract Class<? extends Annotation> supportedAnnotationType();
 
-  public abstract void processElement(Context ctx) throws Exception;
+  protected abstract void processElement(Context ctx) throws Exception;
 
   @Override
   public void init(ProcessingEnvironment env) {
@@ -40,8 +42,9 @@ public abstract class SingleAnnoProc extends AnnoProc {
 
   @Override
   public boolean process(Set<? extends TypeElement> annoSet, RoundEnvironment env) {
+    ClassFileWriter fileWriter = ClassFileWriter.Factory.create(processingEnv.getFiler());
     for (Element elem : env.getElementsAnnotatedWith(_supportAnno)) {
-      tryProcessElem(new ProcTypeImpl((TypeElement) elem, processingEnv));
+      tryProcessElem(createProcessingType(elem, fileWriter), fileWriter);
     }
     return true;
   }
@@ -51,9 +54,13 @@ public abstract class SingleAnnoProc extends AnnoProc {
     return _supportSet;
   }
 
-  private void tryProcessElem(ProcType type) {
+  private ProcType createProcessingType(Element elem, ClassFileWriter fileWriter) {
+    return ProcType.Factory.create((TypeElement) elem, processingEnv, fileWriter);
+  }
+
+  private void tryProcessElem(ProcType type, ClassFileWriter fileWriter) {
     try {
-      processElement(new ContextImpl(type, processingEnv));
+      processElement(new ContextImpl(type, processingEnv, fileWriter));
 
     } catch (Exception e) {
       logException(type.getLogger(), e);

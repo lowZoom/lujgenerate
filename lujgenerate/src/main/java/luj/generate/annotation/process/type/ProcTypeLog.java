@@ -1,8 +1,9 @@
-package luj.generate.annotation.process;
+package luj.generate.annotation.process.type;
 
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
+import luj.generate.annotation.process.AnnoProc;
 
 final class ProcTypeLog implements AnnoProc.Log {
 

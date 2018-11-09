@@ -1,16 +1,20 @@
 package luj.generate.annotation.process;
 
-import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
+import luj.generate.annotation.process.file.ClassFileWriter;
+import luj.generate.annotation.process.type.ProcType;
 
 final class ContextImpl implements SingleAnnoProc.Context {
 
-  ContextImpl(ProcType processingType, ProcessingEnvironment processingEnv) {
+  ContextImpl(ProcType processingType, ProcessingEnvironment processingEnv,
+      ClassFileWriter classFileWriter) {
     _processingType = processingType;
     _processingEnv = processingEnv;
+
+    _classFileWriter = classFileWriter;
   }
 
   @Override
@@ -20,13 +24,12 @@ final class ContextImpl implements SingleAnnoProc.Context {
 
   @Override
   public AnnoProc.Log getLogger() {
-    return new LogImpl(_processingEnv);
+    return new LogImpl(_processingEnv.getMessager());
   }
 
   @Override
   public void writeToFile(String packageName, TypeSpec classSpec) throws IOException {
-    JavaFile file = JavaFile.builder(packageName, classSpec).build();
-    file.writeTo(_processingEnv.getFiler());
+    _classFileWriter.write(packageName, classSpec);
   }
 
   @Override
@@ -37,4 +40,5 @@ final class ContextImpl implements SingleAnnoProc.Context {
   private final ProcType _processingType;
 
   private final ProcessingEnvironment _processingEnv;
+  private final ClassFileWriter _classFileWriter;
 }
