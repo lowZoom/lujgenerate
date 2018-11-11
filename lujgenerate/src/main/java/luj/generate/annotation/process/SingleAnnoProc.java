@@ -41,9 +41,9 @@ public abstract class SingleAnnoProc extends AnnoProc {
   }
 
   @Override
-  public boolean process(Set<? extends TypeElement> annoSet, RoundEnvironment env) {
+  public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     ClassFileWriter fileWriter = ClassFileWriter.Factory.create(processingEnv.getFiler());
-    for (Element elem : env.getElementsAnnotatedWith(_supportAnno)) {
+    for (Element elem : roundEnv.getElementsAnnotatedWith(_supportAnno)) {
       tryProcessElem(createProcessingType(elem, fileWriter), fileWriter);
     }
     return true;
