@@ -43,6 +43,11 @@ final class ProcTypeImpl implements ProcType {
     throw new UnsupportedOperationException("该方法已废弃->ProcTypeImpl.getPackageName");
   }
 
+  @Override
+  public String toString() {
+    return _element.toString();
+  }
+
   private final TypeElement _element;
 
   private final ProcessingEnvironment _processingEnv;
