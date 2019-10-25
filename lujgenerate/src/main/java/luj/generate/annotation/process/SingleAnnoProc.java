@@ -15,6 +15,9 @@ import javax.lang.model.element.TypeElement;
 import luj.generate.annotation.process.file.ClassFileWriter;
 import luj.generate.annotation.process.type.ProcType;
 
+/**
+ * jdk要求子类必须为public
+ */
 public abstract class SingleAnnoProc extends AnnoProc {
 
   public interface Context {

@@ -13,8 +13,8 @@ public interface ProcType {
   interface Factory {
 
     static ProcType create(TypeElement elem,
-        ProcessingEnvironment processingEnv, ClassFileWriter classFileWriter) {
-      return new ProcTypeImpl(elem, processingEnv, classFileWriter);
+        ProcessingEnvironment procEnv, ClassFileWriter classFileWriter) {
+      return new ProcTypeImpl(elem, procEnv, classFileWriter);
     }
   }
 
